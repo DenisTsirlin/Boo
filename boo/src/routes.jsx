@@ -4,15 +4,18 @@ import Home from './pages/Home';
 import Register from './pages/Register';
 
 export const routes = createBrowserRouter([
+
     {
         path: '/',
-        element: <Login />
+        element: <Home />
+        
     },
 
     {
-        path: '/Home',
-        element: <Home />
+        path: '/Login',
+        element: <Login />
     },
+
 
     {
         path: '/Register',

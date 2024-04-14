@@ -149,3 +149,37 @@ background-repeat: no-repeat;
 background-size: 100% 100%;
 filter: brightness(30%);
 }
+
+/* התאמה לנייד*/
+
+@media only screen and (max-width: 500px) {
+  .fullPageBackground {
+    /* Adjust styles for mobile here */
+    height: 185vh;
+    width: 100vh;
+  }
+
+  .card {
+    /* Adjust styles for mobile here */
+    width: 20em;
+    margin-right: 5px;
+  }
+}
+
+
+@media only screen and (min-width: 900px) {
+  /* קוד עבור מסך רחב יותר, כמו דסקטופ */
+
+  .fullPageBackground {
+    height: 115vh; /* הפחתת הגובה לגובה מסך רגיל */
+    width: 100vw; /* הפחתת הרוחב לרוחב מסך רגיל */
+  }
+
+  .card {
+    width: 400px; 
+    
+  }
+
+  
+}
+
