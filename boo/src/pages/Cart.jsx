@@ -1,10 +1,10 @@
-import React from 'react'
+import React, { useState } from 'react';
 import Navbar from '../components/Navbar';
 import styled from 'styled-components';
 import Announcement from '../components/Announcement';
 import Footer from '../components/Footer';
 import { Add, Remove } from '@mui/icons-material';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate,useLocation } from 'react-router-dom';
 
 
 const Container = styled.div`
@@ -163,7 +163,36 @@ const Button = styled.button`
 `;
 
 export default function Cart() {
-    const navigate = useNavigate(); 
+    const navigate = useNavigate();
+    const location = useLocation();
+    const locationState = location.state || {};
+    const product = locationState.product;
+    const selectedColor = locationState.selectedColor;
+    const selectedSize = locationState.selectedSize;
+    const [quantity, setQuantity] = useState(locationState.quantity || 1);
+    const shippingCost = 20;
+    const decreaseQuantity = () => {
+        if (quantity > 1) {
+            setQuantity(prevQuantity => prevQuantity - 1);
+        }
+    };
+
+    const increaseQuantity = () => {
+        setQuantity(prevQuantity => prevQuantity + 1);
+    };
+
+    // Calculate the total price
+    const totalPrice = product ? product.price * quantity : 0;
+
+    // Calculate the subtotal
+    const subtotal = totalPrice;
+
+    // Define the shipping discount based on the subtotal
+    const shippingDiscount = subtotal >= 50 ? -shippingCost : 0;
+
+    // Calculate the total order amount
+    const totalOrderAmount = subtotal + shippingCost + shippingDiscount;
+
     return (
         <Container>
             <Announcement />
@@ -171,58 +200,56 @@ export default function Cart() {
             <Wrapper>
                 <Tittle>YOUR BAG</Tittle>
                 <Top>
-                    <TopButton onClick={() => navigate('/ProductList')}>CONTINUE SHOPPING</TopButton>
-                    <TopButton type="filled">CHECKOUT NOW</TopButton>
+                    <TopButton onClick={() => navigate('/ProductList', { state: {} })}>CONTINUE SHOPPING</TopButton>
                 </Top>
                 <Buttom>
                     <Info>
-
-                        <Product>
-                            <ProductDetail>
-                                <Image src="https://www.artextile.co.il/wp-content/uploads/2020/07/%D7%97%D7%95%D7%9C%D7%A6%D7%94-%D7%90%D7%9E%D7%A8%D7%99%D7%A7%D7%90%D7%99%D7%AA-%D7%91%D7%A1%D7%99%D7%A1-%D7%90%D7%A4%D7%95%D7%A8.jpg" />
-                                <Details>
-                                    <ProductName><b>Product:</b> JESSIE THUNDER SHOES</ProductName>
-                                    <ProductColor color="black" />
-                                    <ProductSize><b>Size:</b> 37.5</ProductSize>
-                                </Details>
-                            </ProductDetail>
-                            <PriceDetail>
-                                <ProductAmountContainer>
-                                    <Add style={{cursor:'pointer'}} />
-                                    <ProductAmount>2</ProductAmount>
-                                    <Remove style={{cursor:'pointer'}} />
-
-                                </ProductAmountContainer>
-
-                                <ProductPrice>$ 30</ProductPrice>
-                            </PriceDetail>
-                        </Product>
+                        {product ? (
+                            <Product>
+                                <ProductDetail>
+                                    <Image src={product.img} />
+                                    <Details>
+                                        <ProductName><b>Product:{product.title}</b></ProductName>
+                                        <ProductColor color={selectedColor} />
+                                        <ProductSize><b>{selectedSize}</b></ProductSize>
+                                    </Details>
+                                </ProductDetail>
+                                <PriceDetail>
+                                    <ProductAmountContainer>
+                                        <Remove style={{cursor:'pointer'}} onClick={decreaseQuantity} />
+                                        <ProductAmount>{quantity}</ProductAmount>
+                                        <Add style={{cursor:'pointer'}} onClick={increaseQuantity} />
+                                    </ProductAmountContainer>
+                                    <ProductPrice>${totalPrice}</ProductPrice>
+                                </PriceDetail>
+                            </Product>
+                        ) : (
+                            <div>Product not found</div>
+                        )}
                         <Hr />
                     </Info>
                     <Summary>
                         <SummaryTitle>ORDER SUMMARY</SummaryTitle>
                         <SummaryItem>
                             <SummaryItemText>Subtotal</SummaryItemText>
-                            <SummaryItemPrice>$ 60</SummaryItemPrice>
+                            <SummaryItemPrice>${subtotal}</SummaryItemPrice>
                         </SummaryItem>
                         <SummaryItem>
-                            <SummaryItemText>Estimated Shipping</SummaryItemText>
-                            <SummaryItemPrice>$ 5.9</SummaryItemPrice>
+                            <SummaryItemText>Shipping</SummaryItemText>
+                            <SummaryItemPrice>${shippingCost}</SummaryItemPrice>
                         </SummaryItem>
                         <SummaryItem>
                             <SummaryItemText>Shipping Discount</SummaryItemText>
-                            <SummaryItemPrice>$ -5.9</SummaryItemPrice>
+                            <SummaryItemPrice>${shippingDiscount}</SummaryItemPrice>
                         </SummaryItem>
                         <SummaryItem type= "total">
                             <SummaryItemText>Total</SummaryItemText>
-                            <SummaryItemPrice>$ 5.9</SummaryItemPrice>
+                            <SummaryItemPrice>${totalOrderAmount}</SummaryItemPrice>
                         </SummaryItem>
-                        <Button>CHECKOUT NOW</Button>
                     </Summary>
                 </Buttom>
             </Wrapper>
             <Footer />
         </Container>
-
     )
 }

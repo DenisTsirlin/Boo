@@ -2,6 +2,7 @@ import { ArrowLeftOutlined, ArrowRightOutlined } from '@mui/icons-material';
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { sliderItems } from '../data';
+import { useNavigate } from 'react-router-dom';
 
 const Container = styled.div`
     height: 100vh;
@@ -79,6 +80,7 @@ const Button = styled.button`
 
 export default function Slider() {
     const [slideIndex, setSlideIndex] = useState(0);
+    const navigate = useNavigate(); 
 
     const handleClick = (direction) => {
         if (direction === 'left') {
@@ -104,7 +106,7 @@ export default function Slider() {
                         <InfoContainer>
                             <Title>{item.title}</Title>
                             <Desc>{item.desc}</Desc>
-                            <Button>SHOW NOW</Button>
+                            <Button onClick={() => navigate('/ProductList')}>SHOW NOW</Button>
                         </InfoContainer>
                     </Slide>
                 ))}

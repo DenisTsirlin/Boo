@@ -1,5 +1,6 @@
 import { FavoriteBorderOutlined, SearchOutlined, ShoppingCartOutlined } from '@mui/icons-material';
 import React from 'react'
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 
@@ -49,6 +50,8 @@ const Circle = styled.div`
 const Image = styled.img`
     height: 75%;
     z-index: 2;
+    cursor: pointer; // Add this line
+
 `;
 
 
@@ -71,12 +74,18 @@ const Icon = styled.div`
 
 `;
 const Product = ({ item }) => {
+    const navigate = useNavigate(); 
+
+    const handleAddToCart = () => {
+        navigate('/Product', { state: { product: item } });
+    };
+
     return (
         <Container>
             <Circle />
             <Image src={item.img} />
             <Info>
-                <Icon>
+                <Icon  onClick={handleAddToCart}>
                     <ShoppingCartOutlined />
                 </Icon>
                 <Icon>

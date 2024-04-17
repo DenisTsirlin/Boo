@@ -48,61 +48,73 @@ export const popularProducts = [
 {
     id:1,
     price:20,
+    title:"Good Tshirt",
     img:"https://www.printingonshirts.co.il/wp-content/uploads/2019/10/%D7%97%D7%95%D7%9C%D7%A6%D7%94-%D7%A7%D7%A6%D7%A8%D7%94-%D7%A9%D7%97%D7%95%D7%A8%D7%94-%D7%92%D7%91.jpg",
 },
 {
     id:2,
     price:30,
+    title:"Nice Tshirt",
     img:"https://www.artextile.co.il/wp-content/uploads/2020/07/%D7%97%D7%95%D7%9C%D7%A6%D7%94-%D7%90%D7%9E%D7%A8%D7%99%D7%A7%D7%90%D7%99%D7%AA-%D7%91%D7%A1%D7%99%D7%A1-%D7%90%D7%A4%D7%95%D7%A8.jpg",
 },
 {
     id:3,
     price:20,
+    title:"Good Pants",
     img:"https://d3m9l0v76dty0.cloudfront.net/system/photos/5550048/large/c293fd69571f97b8c1ea949c97b61d94.jpg",
 },
 {
     id:4,
     price:40,
+    title:"Nice Pants",
     img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRapeIjQnk7JyKrazQpl0DET1Nmp4kbzAGbCqdyx8G8QA&s",
 },
 {
     id:5,
     price:50,
+    title:"Nice kirtle",
     img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6jO0Rb0F4ziy8N7yWwsjjIe---z81g_uU4jlAqJnWYA&s",
 },
 {
     id:6,
     price:40,
+    title:"Good kirtle",
     img:"https://www.filo.co.il/wp-content/uploads/2020/01/%D7%97%D7%A6%D7%90%D7%99%D7%AA-%D7%9E%D7%91%D7%A8%D7%99%D7%A7%D7%94-%D7%99%D7%A8%D7%95%D7%A7-%D7%93%D7%A9%D7%90.jpg",
 },
 {
     id:7,
     price:50,
+    title:"Nice Hat",
     img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRjUNeWoLPGbXOTXaveOc2nBcoWL6ua2CtcsSPAAwdzow&s",
 },
 {
     id:8,
     price:55,
+    title:"Nice Gown",
     img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQAsPx8EKM5GG3J0QIfUhI2GeBXBrUNOLMtIl_i3c2bfw&s",
 },
 {
     id:9,
     price:50,
+    title:"Good Gown",
     img:"https://ae03.alicdn.com/kf/Sbd0b58789770440c9244ebcd1bd512566.jpg",
 },
 {
     id:10,
     price:15,
+    title:"Wonderful kirtle",
     img:"https://plissee.co.il/Cat_488702_1666.jpg",
 },
 {
     id:11,
     price:35,
+    title:"Wonderful Gown",
     img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRlsRZVc1noOauyDUvrxm21gsqBqAzTkdcNJOuLizv-qw&s",
 },
 {
     id:12,
     price:45,
+    title:"Wonderful Hat",
     img:"https://justinehats.com/wp-content/uploads/2019/03/extra-wide-straw-boater-hat-xxl-hat.jpg",
 },
 

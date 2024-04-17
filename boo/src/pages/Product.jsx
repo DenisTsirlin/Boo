@@ -4,7 +4,8 @@ import Announcement from '../components/Announcement';
 import NewsLetter from '../components/NewsLetter';
 import Footer from '../components/Footer';
 import { Add, Remove } from '@mui/icons-material';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
+import React, { useState } from 'react';
 
 
 const Container = styled.div`
@@ -58,7 +59,7 @@ const Filter = styled.div`
 const FilterTitle = styled.span`
     font-size: 20px;
     font-weight: 200;
-`;  
+`;
 
 const FilterColor = styled.div`
     width: 20px;
@@ -118,50 +119,77 @@ const Button = styled.button`
 
 
 export default function Product() {
-    const navigate = useNavigate(); 
+    const [quantity, setQuantity] = useState(1);
+    const location = useLocation();
+    const navigate = useNavigate();
+    const locationState = location.state || {};
+    const product = locationState.product;
+    const [selectedColor, setSelectedColor] = useState("");
+    const [selectedSize, setSelectedSize] = useState("XS");
+    const increaseQuantity = () => {
+        setQuantity(prevQuantity => prevQuantity + 1);
+    };
+
+    const decreaseQuantity = () => {
+        if (quantity > 1) {
+            setQuantity(prevQuantity => prevQuantity - 1);
+        }
+    };
+
+    if (!product) {
+        return <div>No product details available</div>;
+    }
+
+    const addToCart = () => {
+        if (!selectedColor) {
+            alert("Please select size");
+        } else {
+            navigate('/Cart', { state: { product, quantity, selectedColor, selectedSize } });
+        }
+    };
+
     return (
         <Container>
-        <Navbar />
-        <Announcement />
-        <Wrapper>
-            <ImageContainer>
-                <Image src='https://www.printingonshirts.co.il/wp-content/uploads/2019/10/%D7%97%D7%95%D7%9C%D7%A6%D7%94-%D7%A7%D7%A6%D7%A8%D7%94-%D7%A9%D7%97%D7%95%D7%A8%D7%94-%D7%92%D7%91.jpg' />
-            </ImageContainer>
-            <InfoContainer>
-                <Title>Tshirt</Title>
-                <Desc>asdas</Desc>
-                <Price>$20</Price>
-                <FilterContainer>
-                    <Filter>
-                        <FilterTitle>Color</FilterTitle>
-                        <FilterColor color='black' />
-                        <FilterColor color='darkblue' />
-                        <FilterColor color='gray' />
-                    </Filter>
+            <Navbar />
+            <Announcement />
+            <Wrapper>
+                <ImageContainer>
+                    <Image src={product.img} />
+                </ImageContainer>
+                <InfoContainer>
+                    <Title>{product.title}</Title>
+                    <Price>${product.price}</Price>
+                    <FilterContainer>
+                        <Filter>
+                            <FilterTitle>Color</FilterTitle>
+                            <FilterColor color='black' onClick={() => setSelectedColor('black')} />
+                            <FilterColor color='darkblue' onClick={() => setSelectedColor('darkblue')} />
+                            <FilterColor color='gray' onClick={() => setSelectedColor('gray')} />
+                        </Filter>
 
-                    <Filter>
-                        <FilterTitle>Size</FilterTitle>
-                        <FilterSize>
-                            <FilterSizeOption>XS</FilterSizeOption>
-                            <FilterSizeOption>S</FilterSizeOption>
-                            <FilterSizeOption>M</FilterSizeOption>
-                            <FilterSizeOption>L</FilterSizeOption>
-                            <FilterSizeOption>XL</FilterSizeOption>
-                        </FilterSize>
-                    </Filter>
-                </FilterContainer>
-                <AddContainer>
-                    <AmountContainer>
-                        <Remove style={{cursor:'pointer'}} />
-                        <Amount>1</Amount>
-                        <Add style={{cursor:'pointer'}}/>
-                    </AmountContainer>
-                    <Button onClick={() => navigate('/Cart')}>ADD TO CART</Button>
-                </AddContainer>
-            </InfoContainer>
-        </Wrapper>
-        <NewsLetter />
-        <Footer />
-    </Container>
+                        <Filter>
+                            <FilterTitle>Size</FilterTitle>
+                            <FilterSize value={selectedSize} onChange={(e) => setSelectedSize(e.target.value)}>
+                                <FilterSizeOption value="XS">XS</FilterSizeOption>
+                                <FilterSizeOption value="S">S</FilterSizeOption>
+                                <FilterSizeOption value="M">M</FilterSizeOption>
+                                <FilterSizeOption value="L">L</FilterSizeOption>
+                                <FilterSizeOption value="XL">XL</FilterSizeOption>
+                            </FilterSize>
+                        </Filter>
+                    </FilterContainer>
+                    <AddContainer>
+                        <AmountContainer>
+                            <Remove style={{ cursor: 'pointer' }} onClick={decreaseQuantity} />
+                            <Amount>{quantity}</Amount>
+                            <Add style={{ cursor: 'pointer' }} onClick={increaseQuantity} />
+                        </AmountContainer>
+                        <Button onClick={addToCart}>ADD TO CART</Button>
+                    </AddContainer>
+                </InfoContainer>
+            </Wrapper>
+            <NewsLetter />
+            <Footer />
+        </Container>
     )
 }
