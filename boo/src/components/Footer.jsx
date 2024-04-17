@@ -1,6 +1,8 @@
 import React from 'react'
 import { Facebook, Instagram, MailOutlined, Phone, Pinterest, Room, Twitter } from "@mui/icons-material";
 import styled from "styled-components";
+import { useNavigate } from 'react-router-dom';
+
 
 const Container = styled.div`
     display: flex;
@@ -65,6 +67,7 @@ const List = styled.ul`
 const ListItem = styled.li`
     width: 50%;
     margin-bottom: 10px;
+    cursor: pointer;
 `;
 
 const ContactItem = styled.div`
@@ -79,6 +82,8 @@ const Payment = styled.img`
 `;
 
 const Footer = () => {
+    const navigate = useNavigate(); 
+
     return (
         <Container>
             <Left>
@@ -106,16 +111,15 @@ const Footer = () => {
             <Center>
                 <Title>Useful Links</Title>
                 <List>
-                    <ListItem>Home</ListItem>
-                    <ListItem>Cart</ListItem>
-                    <ListItem>Man Fashion</ListItem>
-                    <ListItem>Women Fashion</ListItem>
+                    <ListItem onClick={() => navigate('/')}>Home</ListItem>
+                    <ListItem onClick={() => navigate('/Cart')}>Cart</ListItem>
+                    <ListItem>Tshirt</ListItem>
+                    <ListItem>Pants</ListItem>
                     <ListItem>Accessories</ListItem>
-                    <ListItem>My Account</ListItem>
+                    <ListItem>Gown</ListItem>
+                    <ListItem>Kirtle</ListItem>
                     <ListItem>Oreder Tracking</ListItem>
-                    <ListItem>Wishlist</ListItem>
-                    <ListItem>Wishlist</ListItem>
-                    <ListItem>Terms</ListItem>
+
 
                 </List>
 

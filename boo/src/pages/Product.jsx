@@ -4,6 +4,7 @@ import Announcement from '../components/Announcement';
 import NewsLetter from '../components/NewsLetter';
 import Footer from '../components/Footer';
 import { Add, Remove } from '@mui/icons-material';
+import { useNavigate } from 'react-router-dom';
 
 
 const Container = styled.div`
@@ -117,6 +118,7 @@ const Button = styled.button`
 
 
 export default function Product() {
+    const navigate = useNavigate(); 
     return (
         <Container>
         <Navbar />
@@ -150,11 +152,11 @@ export default function Product() {
                 </FilterContainer>
                 <AddContainer>
                     <AmountContainer>
-                        <Remove />
+                        <Remove style={{cursor:'pointer'}} />
                         <Amount>1</Amount>
-                        <Add />
+                        <Add style={{cursor:'pointer'}}/>
                     </AmountContainer>
-                    <Button>ADD TO CART</Button>
+                    <Button onClick={() => navigate('/Cart')}>ADD TO CART</Button>
                 </AddContainer>
             </InfoContainer>
         </Wrapper>

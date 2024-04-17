@@ -63,8 +63,8 @@ export default function LoginFc({ onLogin }) {
                     <input
                       type="text"
                       className="form-control"
-                      style={{ width: 'calc(100% - 80px)', padding: '10px', direction: 'rtl' }}
-                      placeholder="אימייל"
+                      style={{ width: 'calc(100% - 80px)', padding: '10px' }}
+                      placeholder="Email"
                       value={email}
                       onChange={handleChangeEmail}
                     />
@@ -73,8 +73,8 @@ export default function LoginFc({ onLogin }) {
                     <input
                       type="password"
                       className="form-control"
-                      style={{ width: 'calc(100% - 80px)', padding: '10px', direction: 'rtl' }}
-                      placeholder="סיסמא"
+                      style={{ width: 'calc(100% - 80px)', padding: '10px' }}
+                      placeholder="Password"
                       value={password}
                       onChange={handleChangePassword}
                     />
@@ -82,7 +82,7 @@ export default function LoginFc({ onLogin }) {
                   <div className="form-group form-group2">
                     <input
                       type="submit"
-                      value="התחברות"
+                      value="Login"
                       className="btn float-right login_btn"
                       style={{ fontSize: '22px' }}
                     />
@@ -91,7 +91,7 @@ export default function LoginFc({ onLogin }) {
               </div>
               <div className="card-footer">
                 <div className="d-flex justify-content-center links DontAccout" style={{ fontSize: '20px', color: '' }}>
-                  אין לך חשבון? <Link to="/Register" style={{ color: '#5bb9cf' }}>הרשמה</Link>
+                Do not have an account? <Link to="/Register" style={{ color: '#5bb9cf' }}>Register</Link>
                 </div>
               </div>
             </div>

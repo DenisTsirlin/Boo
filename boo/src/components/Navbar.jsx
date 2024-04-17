@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components';
 import { Search, ShoppingCartOutlined } from '@mui/icons-material';
 import Badge from '@mui/material/Badge';
+import { useNavigate } from 'react-router-dom';
 
 const Container = styled.div`
 height: 60px;
@@ -42,6 +43,9 @@ const Center = styled.div`
 `
 const Logo = styled.h1`
 font-weight: bold;
+cursor: pointer;
+text-decoration: !important;
+color: inherit !important;
 `
 
 const Right = styled.div`
@@ -60,6 +64,8 @@ const MenuItem = styled.div`
 
 export default function Navbar() {
 
+    const navigate = useNavigate(); 
+
 
     return (
         <Container>
@@ -68,16 +74,19 @@ export default function Navbar() {
                     <Language>EN</Language>
                     <SearchContainer>
                         <Input />
-                        <Search style={{color:'gray',fontSize:'16px'}}/>
+                        <Search style={{ color: 'gray', fontSize: '16px' }} />
                     </SearchContainer>
                 </Left>
-                <Center><Logo>BOO</Logo></Center>
+                <Center>
+                   
+                    <Logo onClick={() => navigate('/')}>BOO</Logo>
+                </Center>
                 <Right>
-                    <MenuItem>REGISTER</MenuItem>
-                    <MenuItem>SIGN IN</MenuItem>
+                    <MenuItem onClick={() => navigate('/Register')}>REGISTER</MenuItem>
+                    <MenuItem onClick={() => navigate('/Login')}>SIGN IN</MenuItem>
                     <MenuItem>
                         <Badge badgeContent={0} color="primary" >
-                            <ShoppingCartOutlined />
+                            <ShoppingCartOutlined  onClick={() => navigate('/Cart')}/>
                         </Badge>
                     </MenuItem>
                 </Right>

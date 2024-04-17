@@ -72,10 +72,11 @@ export default function ProductList() {
 
                     <FilterText>Sort Products:</FilterText>
                     <Select>
-                        <Option selected>Newest</Option>
-                        <Option>Price (asc)</Option>
-                        <Option>Price (desc)</Option>
-
+                        <Option selected>Tshirt</Option>
+                        <Option>Pants</Option>
+                        <Option>accessories</Option>
+                        <Option>Gown</Option>
+                        <Option>Kirtle</Option>
                     </Select>
                 </Filter>
 

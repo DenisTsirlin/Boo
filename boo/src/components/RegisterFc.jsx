@@ -5,7 +5,6 @@ export default function RegisterFc({ onRegister }) {
   const navigate = useNavigate();
 
   const [form, setForm] = useState({
-    fullName: '',
     email: '',
     password: '',
     confirmPassword: '',
@@ -23,14 +22,14 @@ export default function RegisterFc({ onRegister }) {
     event.preventDefault();
     
     if (form.password !== form.confirmPassword) {
-      alert('הסיסמאות אינן תואמות');
+      alert('The passwords do not match');
       return;
     }
 
     const existingUsers = JSON.parse(sessionStorage.getItem('users')) || [];
     const emailExists = existingUsers.some(user => user.email === form.email);
     if (emailExists) {
-      alert('כתובת המייל כבר קיימת במערכת');
+      alert('The email address already exists');
       return;
     }
 
@@ -43,10 +42,9 @@ export default function RegisterFc({ onRegister }) {
     const updatedUsers = [...existingUsers, newUser];
     sessionStorage.setItem('users', JSON.stringify(updatedUsers));
     onRegister(newUser);
-    alert('המשתמש נרשם בהצלחה!');
+    alert('The user has successfully registered!');
     
     setForm({
-      fullName: '',
       email: '',
       password: '',
       confirmPassword: '',
@@ -70,33 +68,18 @@ export default function RegisterFc({ onRegister }) {
               <div className="p-3 p-md-4 p-xl-5" style={{ backgroundColor: '#aaafb3' }}>
                 <div className="row">
                   <div className="col-12">
-                    <div className="mb-5" style={{ direction: 'rtl' }}>
-                      <h2 className="h3">הרשמה</h2>
-                      <h3 className="fs-6 fw-normal text-secondary m-0">הכנס את הפרטים</h3>
+                    <div className="mb-5">
+                      <h2 className="h3">Register</h2>
+                      <h3 className="fs-6 fw-normal text-secondary m-0">Enter the details</h3>
                     </div>
                   </div>
                 </div>
                 <form onSubmit={handleSubmit}>
-                  <div className="row gy-3 gy-md-4 overflow-hidden" style={{ direction: 'rtl' }}>
+                  <div className="row gy-3 gy-md-4 overflow-hidden" >
+                   
                     <div className="col-12">
-                      <label htmlFor="fullName" className="form-label">
-                        שם מלא <span className="text-danger">*</span>
-                      </label>
-                      <input
-                        type="text"
-                        className="form-control"
-                        name="fullName"
-                        id="fullName"
-                        placeholder="שם מלא"
-                        required
-                        value={form.fullName}
-                        onChange={handleChange}
-                      />
-                    </div>
-
-                    <div className="col-12" style={{ direction: 'rtl' }}>
                       <label htmlFor="email" className="form-label">
-                        כתובת מייל <span className="text-danger">*</span>
+                       Email address<span className="text-danger">*</span>
                       </label>
                       <input
                         type="email"
@@ -111,7 +94,7 @@ export default function RegisterFc({ onRegister }) {
                     </div>
                     <div className="col-12">
                       <label htmlFor="password" className="form-label">
-                        סיסמא <span className="text-danger">*</span>
+                        Password <span className="text-danger">*</span>
                       </label>
                       <input
                         type="password"
@@ -125,7 +108,7 @@ export default function RegisterFc({ onRegister }) {
                     </div>
                     <div className="col-12">
                       <label htmlFor="confirmPassword" className="form-label">
-                        אימות סיסמא <span className="text-danger">*</span>
+                      Confirm Password<span className="text-danger">*</span>
                       </label>
                       <input
                         type="password"
@@ -150,9 +133,9 @@ export default function RegisterFc({ onRegister }) {
                           onChange={() => setForm({ ...form, iAgree: !form.iAgree })}
                         />
                         <label className="form-check-label text-secondary" htmlFor="iAgree">
-                          אני מסכים {' '}
+                       I Agree {' '}
                           <a href="#!" className="link-primary text-decoration-none">
-                            לתנאי השימוש
+                          to the terms of use
                           </a>
                         </label>
                         

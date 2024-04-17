@@ -4,6 +4,8 @@ import styled from 'styled-components';
 import Announcement from '../components/Announcement';
 import Footer from '../components/Footer';
 import { Add, Remove } from '@mui/icons-material';
+import { useNavigate } from 'react-router-dom';
+
 
 const Container = styled.div`
 `;
@@ -81,12 +83,9 @@ const Details = styled.div`
 `;
 
 const ProductName = styled.span`
-
-
 `;
 
 const ProductId = styled.span`
-
 `;
 
 const ProductColor = styled.div`
@@ -164,18 +163,15 @@ const Button = styled.button`
 `;
 
 export default function Cart() {
+    const navigate = useNavigate(); 
     return (
         <Container>
-            <Navbar />
             <Announcement />
+            <Navbar />
             <Wrapper>
                 <Tittle>YOUR BAG</Tittle>
                 <Top>
-                    <TopButton>CONTINUE SHOPPING</TopButton>
-                    <TopTexts>
-                        <Toptext>Shopping Bag(0)</Toptext>
-                        <Toptext>Your Wishlist(0)</Toptext>
-                    </TopTexts>
+                    <TopButton onClick={() => navigate('/ProductList')}>CONTINUE SHOPPING</TopButton>
                     <TopButton type="filled">CHECKOUT NOW</TopButton>
                 </Top>
                 <Buttom>
@@ -186,16 +182,15 @@ export default function Cart() {
                                 <Image src="https://www.artextile.co.il/wp-content/uploads/2020/07/%D7%97%D7%95%D7%9C%D7%A6%D7%94-%D7%90%D7%9E%D7%A8%D7%99%D7%A7%D7%90%D7%99%D7%AA-%D7%91%D7%A1%D7%99%D7%A1-%D7%90%D7%A4%D7%95%D7%A8.jpg" />
                                 <Details>
                                     <ProductName><b>Product:</b> JESSIE THUNDER SHOES</ProductName>
-                                    <ProductId><b>ID:</b> 93813718293</ProductId>
                                     <ProductColor color="black" />
                                     <ProductSize><b>Size:</b> 37.5</ProductSize>
                                 </Details>
                             </ProductDetail>
                             <PriceDetail>
                                 <ProductAmountContainer>
-                                    <Add />
+                                    <Add style={{cursor:'pointer'}} />
                                     <ProductAmount>2</ProductAmount>
-                                    <Remove />
+                                    <Remove style={{cursor:'pointer'}} />
 
                                 </ProductAmountContainer>
 
@@ -203,26 +198,6 @@ export default function Cart() {
                             </PriceDetail>
                         </Product>
                         <Hr />
-                        <Product>
-                            <ProductDetail>
-                                <Image src="https://www.artextile.co.il/wp-content/uploads/2020/07/%D7%97%D7%95%D7%9C%D7%A6%D7%94-%D7%90%D7%9E%D7%A8%D7%99%D7%A7%D7%90%D7%99%D7%AA-%D7%91%D7%A1%D7%99%D7%A1-%D7%90%D7%A4%D7%95%D7%A8.jpg" />
-                                <Details>
-                                    <ProductName><b>Product:</b> JESSIE THUNDER SHOES</ProductName>
-                                    <ProductId><b>ID:</b> 93813718293</ProductId>
-                                    <ProductColor color="black" />
-                                    <ProductSize><b>Size:</b> 37.5</ProductSize>
-                                </Details>
-                            </ProductDetail>
-                            <PriceDetail>
-                                <ProductAmountContainer>
-                                    <Add />
-                                    <ProductAmount>2</ProductAmount>
-                                    <Remove />
-
-                                </ProductAmountContainer>
-                                <ProductPrice>$ 30</ProductPrice>
-                            </PriceDetail>
-                        </Product>
                     </Info>
                     <Summary>
                         <SummaryTitle>ORDER SUMMARY</SummaryTitle>
