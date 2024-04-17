@@ -8,7 +8,7 @@ export default function LoginFc({ onLogin }) {
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
-    const storedUsers = JSON.parse(sessionStorage.getItem('users')) ;
+    const storedUsers = JSON.parse(sessionStorage.getItem('users')) || [];
     setUsers(storedUsers);
   }, []);
 
@@ -20,28 +20,37 @@ export default function LoginFc({ onLogin }) {
     setPassword(event.target.value);
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    // Trim input values
-    const trimmedEmail = email.trim();
-    const trimmedPassword = password.trim();
-  
-    // Check if the email and password match any user's credentials
+  // Assuming this code is part of your login component
+const handleSubmit = (event) => {
+  event.preventDefault();
+  const trimmedEmail = email.trim();
+  const trimmedPassword = password.trim();
+
+  if (trimmedEmail === 'admin@gmail.com' && trimmedPassword === '207252909') {
+    const adminUser = { email: 'admin@gmail.com', password: '207252909' };
+    // Set authenticated and admin status in sessionStorage
+    sessionStorage.setItem('authenticated', 'true');
+    sessionStorage.setItem('admin', 'true');
+    onLogin(adminUser);
+    alert('Login successful!');
+    navigate('/Admin');
+  } else {
     const foundUser = users.find((user) => user.email.trim().toLowerCase() === trimmedEmail.toLowerCase() && user.password === trimmedPassword);
-  
+
     if (foundUser) {
-      // If user is found, call the onLogin function passed from parent component
       onLogin(foundUser);
       alert('Login successful!');
-      // Redirect to home page after successful login
+      sessionStorage.setItem('authenticated', 'true');
       navigate('/');
     } else {
+      // If credentials do not match, show an error message
       alert('Invalid email or password');
     }
-    // Reset form fields
-    setEmail('');
-    setPassword('');
-  };
+  }
+  setEmail('');
+  setPassword('');
+};
+
   
   return (
     <div className='fullPageBackground'>

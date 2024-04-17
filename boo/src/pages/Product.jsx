@@ -120,33 +120,63 @@ const Button = styled.button`
 
 export default function Product() {
     const [quantity, setQuantity] = useState(1);
+    const [selectedColor, setSelectedColor] = useState("");
+    const [selectedSize, setSelectedSize] = useState("XS");
     const location = useLocation();
     const navigate = useNavigate();
     const locationState = location.state || {};
     const product = locationState.product;
-    const [selectedColor, setSelectedColor] = useState("");
-    const [selectedSize, setSelectedSize] = useState("XS");
+  
     const increaseQuantity = () => {
-        setQuantity(prevQuantity => prevQuantity + 1);
+      setQuantity(prevQuantity => prevQuantity + 1);
     };
-
+  
     const decreaseQuantity = () => {
-        if (quantity > 1) {
-            setQuantity(prevQuantity => prevQuantity - 1);
-        }
+      if (quantity > 1) {
+        setQuantity(prevQuantity => prevQuantity - 1);
+      }
     };
-
-    if (!product) {
-        return <div>No product details available</div>;
-    }
-
+  
     const addToCart = () => {
-        if (!selectedColor) {
-            alert("Please select size");
-        } else {
-            navigate('/Cart', { state: { product, quantity, selectedColor, selectedSize } });
+      if (!selectedColor) {
+        alert("Please select color");
+        return;
+      }
+      
+      const newCartItem = {
+        id: product.id,
+        title: product.title,
+        img: product.img,
+        price: product.price,
+        quantity,
+        selectedColor,
+        selectedSize
+      };
+  
+      const existingCartItemsString = sessionStorage.getItem('cart');
+      let existingCartItems = [];
+      
+      if (existingCartItemsString) {
+        try {
+          existingCartItems = JSON.parse(existingCartItemsString);
+          if (!Array.isArray(existingCartItems)) {
+            console.error('Existing cart items is not an array:', existingCartItems);
+            return;
+          }
+        } catch (error) {
+          console.error('Error parsing existing cart items:', error);
+          return;
         }
+      }
+      
+      const updatedCartItems = [...existingCartItems, newCartItem];
+      
+      sessionStorage.setItem('cart', JSON.stringify(updatedCartItems));
+      
+      navigate('/Cart');
     };
+    
+    
 
     return (
         <Container>

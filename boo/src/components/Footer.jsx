@@ -88,9 +88,8 @@ const Footer = () => {
         <Container>
             <Left>
                 <Logo>Boo </Logo>
-                <Desc>Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                    Expedita praesentium labore optio vel modi placeat sed facilis molestias,
-                    assumenda quo saepe esse aspernatur consequatur a veritatis. Corrupti ut sapiente explicabo?
+                <Desc>Welcome to our clothing store, where style meets comfort! Explore our curated collection of trendy apparel and accessories designed to elevate your wardrobe. 
+                    From casual essentials to elegant ensembles, we have everything you need to express your unique fashion sense with confidence
                 </Desc>
                 <SocialContainer>
                     <SocialIcon color="3B5999">
@@ -113,11 +112,6 @@ const Footer = () => {
                 <List>
                     <ListItem onClick={() => navigate('/')}>Home</ListItem>
                     <ListItem onClick={() => navigate('/Cart')}>Cart</ListItem>
-                    <ListItem>Tshirt</ListItem>
-                    <ListItem>Pants</ListItem>
-                    <ListItem>Accessories</ListItem>
-                    <ListItem>Gown</ListItem>
-                    <ListItem>Kirtle</ListItem>
                     <ListItem>Oreder Tracking</ListItem>
 
 

@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 
 const Container = styled.div`
@@ -45,13 +46,14 @@ const Button = styled.button`
 
 
 const CategoryItem = ({ item }) => {
+    const navigate = useNavigate();
 
     return (
         <Container>
             <Image src={item.img} />
             <Info>
                 <Title>{item.title}</Title>
-                <Button>SHOP NOW</Button>
+                <Button onClick={() => navigate('/ProductList')}>SHOP NOW</Button>
             </Info>
         </Container>
     )

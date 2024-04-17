@@ -1,24 +1,20 @@
-import React from 'react'
-import styled from "styled-components";
-import Navbar from "../components/Navbar";
-import Announcement from "../components/Announcement";
-import Footer from "../components/Footer";
-import Products from "../components/Products";
-import NewsLetter from "../components/NewsLetter";
+import React, { useState, useEffect } from 'react';
+import styled from 'styled-components';
+import Navbar from '../components/Navbar';
+import Announcement from '../components/Announcement';
+import Footer from '../components/Footer';
+import Products from '../components/Products';
+import NewsLetter from '../components/NewsLetter';
+import { popularProducts } from '../data';
 
-
-
-const Container = styled.div`
-
-`;
+const Container = styled.div``;
 
 const Title = styled.h1`
     margin: 20px;
 `;
 
-
 const FilterContainer = styled.div`
-   display: flex;
+    display: flex;
     justify-content: space-between;
 `;
 
@@ -32,7 +28,7 @@ const FilterText = styled.span`
     margin-right: 20px;
 `;
 
-const Select = styled.select`   
+const Select = styled.select`
     padding: 10px;
     margin-right: 20px;
 `;
@@ -41,49 +37,36 @@ const Option = styled.option`
     padding: 10px;
 `;
 
+const categories = ['All', 'Tshirt', 'Pants', 'Hat', 'Gown', 'Kirtle']; // Define categories here
+
 export default function ProductList() {
+    const [cartItemCount, setCartItemCount] = useState(0);
+    const [selectedCategory, setSelectedCategory] = useState('All');
+
+    useEffect(() => {
+        const cartItems = JSON.parse(sessionStorage.getItem('cart')) || [];
+        const totalCount = cartItems.reduce((total, item) => total + item.quantity, 0);
+        setCartItemCount(totalCount);
+    }, []);
+
     return (
         <Container>
-            <Navbar />
+            <Navbar cartItemCount={cartItemCount} />
             <Announcement />
             <Title>Dresses</Title>
             <FilterContainer>
                 <Filter>
-                    <FilterText>Filter Products:</FilterText>
-                    <Select>
-                        <Option disabled selected>Color</Option>
-                        <Option>White</Option>
-                        <Option>Black</Option>
-                        <Option>Red</Option>
-                        <Option>Blue</Option>
-                        <Option>Yellow</Option>
-                        <Option>Green</Option>
-                    </Select>
-                    <Select>
-                        <Option disabled selected>Size</Option>
-                        <Option>XS</Option>
-                        <Option>S</Option>
-                        <Option>M</Option>
-                        <Option>L</Option>
-                        <Option>XL</Option>
-                    </Select>
-                </Filter>
-                <Filter>
-
                     <FilterText>Sort Products:</FilterText>
-                    <Select>
-                        <Option selected>Tshirt</Option>
-                        <Option>Pants</Option>
-                        <Option>accessories</Option>
-                        <Option>Gown</Option>
-                        <Option>Kirtle</Option>
+                    <Select value={selectedCategory} onChange={(e) => setSelectedCategory(e.target.value)}>
+                        {categories.map(category => (
+                            <Option key={category} value={category}>{category}</Option>
+                        ))}
                     </Select>
                 </Filter>
-
             </FilterContainer>
-            <Products />
+            <Products selectedCategory={selectedCategory} />
             <NewsLetter />
             <Footer />
         </Container>
-    )
+    );
 }

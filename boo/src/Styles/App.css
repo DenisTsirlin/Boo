@@ -2,7 +2,7 @@
 דף התחברות
 */
 .fullPageBackground {
-  background-image: url('https://i.pinimg.com/564x/4a/9a/c1/4a9ac10e0376bc4d86033bcd64c9a003.jpg');
+  background-image: url('https://i.pinimg.com/236x/9a/93/a9/9a93a9bb602470330bff49bd5baa5858.jpg');
   background-repeat: no-repeat;
    background-size: 100% 100%;
   font-family: 'Numans', sans-serif;
@@ -144,11 +144,15 @@ margin-left: 4px;
 }
 
 .bsb-tpl-bg-platinum {
-background-image:url('https://i.pinimg.com/564x/72/72/c8/7272c8bab7c2470a42cb14ddd8f3b148.jpg')!important ;
-background-repeat: no-repeat;
-background-size: 100% 100%;
-filter: brightness(30%);
+background-image:url('https://i.pinimg.com/236x/73/aa/bc/73aabcd614f9d5c31477a674e268afd5.jpg')!important ;
+background-repeat: no-repeat !important;
+background-size: 100% 100% !important;
+background-position: center;
+filter: brightness(45%);
 }
+
+
+
 
 /* התאמה לנייד*/
 
@@ -182,4 +186,3 @@ filter: brightness(30%);
 
   
 }
-
